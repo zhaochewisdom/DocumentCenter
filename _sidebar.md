@@ -1,4 +1,4 @@
-- [**Quick Start**](README.md)
+- [**Quick Start**](index.md)
 - **用户中心**
 	- [简介](sso/index.md)
 	- [网页端集成](sso/pc.md)
