@@ -1,5 +1,6 @@
-- [SSO](sso/)
-- [简介](sso/)
-- [网页端集成](sso/pc.md)
-- [APP集成](sso/app.md)
-- [WebHook](sso/webhook.md)
+<img src="images/logo2.png" width="180px" />
+- [Quick Start](index.md)
+- [用户中心](sso/index.md)
+- [关于朝彻](about.md)
+
+
