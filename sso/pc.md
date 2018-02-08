@@ -30,5 +30,11 @@ http://sso.zhaochewisdom.com/serviceValidate?service=http://www.3rd.com/loginByS
 | service | 是       | 用户登录成功后跳转回第三方系统的URL地址。<br />该地址会在用户中心备案，并会有验证。 |
 | state   | 否       | 第三方系统附带参数，该参数会被传递至service所定义的URL地址，<br />用于第三方系统传递数据使用。 |
 
+!> 注意！如果state参数是带有参数的URL地址，需要两次encode处理，如：
+
+```
+state = "/index.html?param=value" //没有encode前
+state = "%252Findex.html%253Fparam%253Dvalue" //两次encode后
+```
 
 ## 通过票据请求用户信息
