@@ -1,18 +1,18 @@
-## 授权流程说明
+## 网页授权流程说明
 
 > 用户在访问第三方系统时，第三方系统判断用户是否已经在自己系统登录，如果没有则跳转至用户中心登录页面，用户授权登录后，系统会跳转会第三方系统并附带票据信息，第三方系统使用票据通过接口获取到登录的用户信息，并于自己系统用户关联，生成登录凭证，完成用户登录。
 
 ```mermaid
 %% Example of sequence diagram
   sequenceDiagram
-    用户->>第三方系统: 访问第三方系统
-    第三方系统->>用户中心: 请求授权登录(跳转登录页)
+    用户->>第三方网页端: 访问第三方系统
+    第三方网页端->>用户中心: 请求授权登录(跳转登录页)
     用户中心-->>用户: 请求用户登录
     用户->>用户中心: 用户登录
-    用户中心-->>第三方系统: 重定向到第三方系统，附带票据(ticket)
-    第三方系统->>用户中心: 通过票据请求用户信息
-    用户中心-->>第三方系统: 返回用户信息
-    第三方系统->>用户: 用户登录系统
+    用户中心-->>第三方网页端: 重定向到第三方系统，附带票据(ticket)
+    第三方网页端->>用户中心: 通过票据请求用户信息
+    用户中心-->>第三方网页端: 返回用户信息
+    第三方网页端->>用户: 用户登录系统
 ```
 
 ## 第一步：请求授权登录(跳转登录页)
@@ -21,7 +21,7 @@
 
 ```
 // HTTP GET
-http://sso.zhaochewisdom.com/login?service=http://localhost/loginBySSO&state=/index.html
+http://sso.zhaochewisdom.com/login?service=http://yourweb.com/loginBySSO&state=/index.html
 ```
 
 ### 参数说明
@@ -43,7 +43,7 @@ state = "%252Findex.html%253Fparam%253Dvalue" //两次encode后
 > 用户登录成功后，将会重定向到service的网址上，并且带上ticket和state参数。
 
 ```
-http://localhost/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw&state=/index.html
+http://yourweb.com/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw&state=/index.html
 ```
 
 ## 第二步：通过票据请求用户信息
@@ -52,7 +52,7 @@ http://localhost/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEn
 
 ```
 // HTTP GET
-http://sso.zhaochewisdom.com/serviceValidate?service=http://localhost/loginBySSO&ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw
+http://sso.zhaochewisdom.com/serviceValidate?service=http://yourweb.com/loginBySSO&ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw
 ```
 
 ### 参数说明
