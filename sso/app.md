@@ -67,28 +67,103 @@ http://sso.zhaochewisdom.com/api/login
 
 ```
 {
-	"code": 0,
-	"msg": "",
-	"innerMsg": "",
-	"results": {
-		"authenticationFailure": {
-			"code": "INVALID_USER",
-			"description": "Login fail."
-		}
-	}
+	"code": 400,
+	"msg": "Login fail",
+	"innerMsg": "INVALID_USER",
+	"results": {}
 }
 ```
 
 ### 参数说明
 
-| 参数                                                | 说明                 |
-| :-------------------------------------------------- | :------------------- |
-| serviceResponse. authenticationFailure              | 验证失败的返回对象。 |
-| serviceResponse. authenticationFailure. code        | 错误代码。           |
-| serviceResponse. authenticationFailure. description | 错误说明。           |
+| 参数     | 说明           |
+| :------- | :------------- |
+| code     | 错误代码。     |
+| msg      | 错误提示。     |
+| innerMsg | 错误内部说明。 |
 
 
 ## 第二步：通过票据请求用户信息
 
 > 第三方系统在接收到用户票据信息后，可以通过接口请求该票据所对应的用户信息，该操作同网页端，[跳转查看](sso/pc?id=第二步：通过票据请求用户信息)。
+
+
+
+## 客户端扫码登录
+
+> 用户中心网页端登录页面支持扫码登录，第三方APP客户端可以集成该功能，在APP端用户完成登录后，扫描网页端登录二维码完成网页端登录。
+
+```mermaid
+%% Example of sequence diagram
+  sequenceDiagram
+    用户->>第三方APP: 登录APP
+    用户->>第三方网页: 访问第三方网页
+    第三方网页-->>用户: 请求用户登录
+    用户->>第三方APP: 使用扫码登录
+    第三方APP->>第三方网页: 扫描登录码
+    第三方网页-->>第三方APP: 获取登录码
+    第三方APP->>用户中心: 访问用户中心扫码登录接口(用户票据、登录码)
+    用户中心-->>第三方APP: 返回扫码登录验证结果
+    用户中心-->>第三方网页: 通知扫码登录验证通过
+    第三方网页->>用户: 用户登录系统
+```
+
+## 扫码登录接口
+
+```
+// HTTP POST
+http://sso.zhaochewisdom.com/api/qrcode/login
+// FORM BODY
+{
+	"qrcode": "qrcode",
+	"tgt": "tgt",
+	"service": "http://yourweb.com/"
+}
+```
+
+### 参数说明
+
+| 参数    | 是否必须 | 说明                               |
+| :------ | :------- | :--------------------------------- |
+| qrcode  | 是       | 扫描到的二维码信息。               |
+| tgt     | 是       | 用户登录接口获取到的TGT。          |
+| service | 是       | 安全域名，该地址会再用户中心备案。 |
+
+### 返回说明
+
+### 验证成功的返回结果
+
+```
+{
+	"code": 0,
+	"msg": "",
+	"innerMsg": "",
+	"results": true
+}
+```
+
+### 参数说明
+
+| 参数    | 说明                   |
+| :------ | :--------------------- |
+| results | 扫码登录验证是否通过。 |
+
+### 验证失败的返回结果
+
+```
+{
+	"code": 400,
+	"msg": "QRLogin fail.",
+	"innerMsg": "INVALID_USER",
+	"results": false
+}
+```
+
+### 参数说明
+
+| 参数    | 说明                   |
+| :------ | :--------------------- |
+| results | 扫码登录验证是否通过。 |
+
+## APP内嵌网页登录
 

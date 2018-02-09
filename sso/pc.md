@@ -5,14 +5,14 @@
 ```mermaid
 %% Example of sequence diagram
   sequenceDiagram
-    用户->>第三方网页端: 访问第三方系统
-    第三方网页端->>用户中心: 请求授权登录(跳转登录页)
+    用户->>第三方网页: 访问第三方系统
+    第三方网页->>用户中心: 请求授权登录(跳转登录页)
     用户中心-->>用户: 请求用户登录
     用户->>用户中心: 用户登录
-    用户中心-->>第三方网页端: 重定向到第三方系统，附带票据(ticket)
-    第三方网页端->>用户中心: 通过票据请求用户信息
-    用户中心-->>第三方网页端: 返回用户信息
-    第三方网页端->>用户: 用户登录系统
+    用户中心-->>第三方网页: 重定向到第三方系统，附带票据(ticket)
+    第三方网页->>用户中心: 通过票据请求用户信息
+    用户中心-->>第三方网页: 返回用户信息
+    第三方网页->>用户: 用户登录系统
 ```
 
 ## 第一步：请求授权登录(跳转登录页)
@@ -67,65 +67,36 @@ http://sso.zhaochewisdom.com/serviceValidate?service=http://yourweb.com/loginByS
 ### 验证成功的返回结果
 ```
 {
-    "code": 0,
-    "msg": "",
-    "innerMsg": "",
-    "results": {
-        "serviceResponse": {
-            "authenticationSuccess": {
-                "user": "27712164270902987004601033215261",
-                "attributes": {
-                    "credentialType": "UsernamePasswordCredential",
-                    "isFromNewLogin": [
-                        false
-                    ],
-                    "authenticationDate": [
-                        1518147447.251
-                    ],
-                    "authenticationMethod": "RestAuthenticationHandler",
-                    "successfulAuthenticationHandlers": [
-                        "RestAuthenticationHandler"
-                    ],
-                    "longTermAuthenticationRequestTokenUsed": [
-                        false
-                    ]
-                }
-            }
-        }
-    }
+	"code": 0,
+	"msg": "",
+	"innerMsg": "",
+	"results": {
+		"ssoid": "27712164270902987004601033215261"
+	}
 }
 ```
 
 ### 参数说明
 
-| 参数                                               | 说明                                             |
-| :------------------------------------------------- | :----------------------------------------------- |
-| serviceResponse. authenticationSuccess             | 验证通过的返回对象。                             |
-| serviceResponse. authenticationSuccess. user       | 用户编号，使用此编号关联自己系统中所对应的用户。 |
-| serviceResponse. authenticationSuccess. attributes | 附加属性对象。                                   |
+| 参数          | 说明                                             |
+| :------------ | :----------------------------------------------- |
+| results.ssoid | 用户编号，使用此编号关联自己系统中所对应的用户。 |
 
 
 ### 验证失败的返回结果
 ```
 {
-    "code": 0,
-    "msg": "",
-    "innerMsg": "",
-    "results": {
-        "serviceResponse": {
-            "authenticationFailure": {
-                "code": "INVALID_TICKET",
-                "description": "Ticket 'ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw' not recognized"
-            }
-        }
-    }
+    "code": 400,
+    "msg": "Ticket 'ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw' not recognized",
+    "innerMsg": "INVALID_TICKET",
+    "results": {}
 }
 ```
 ### 参数说明
 
-| 参数                                                | 说明                 |
-| :-------------------------------------------------- | :------------------- |
-| serviceResponse. authenticationFailure              | 验证失败的返回对象。 |
-| serviceResponse. authenticationFailure. code        | 错误代码             |
-| serviceResponse. authenticationFailure. description | 错误说明             |
+| 参数     | 说明           |
+| :------- | :------------- |
+| code     | 错误代码。     |
+| msg      | 错误提示。     |
+| innerMsg | 错误内部说明。 |
 
