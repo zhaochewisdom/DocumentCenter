@@ -15,12 +15,13 @@
     第三方系统->>用户: 用户登录系统
 ```
 
-## 请求授权登录(跳转登录页)
+## 第一步：请求授权登录(跳转登录页)
 
-> 第三方系统跳转至用户中心登录页，并附带参数，链接如下：
+> 第三方系统跳转至用户中心登录页，并附带service和state参数。
 
 ```
-http://sso.zhaochewisdom.com/serviceValidate?service=http://www.3rd.com/loginBySSO&state=/index.html
+// HTTP GET
+http://sso.zhaochewisdom.com/login?service=http://localhost/loginBySSO&state=/index.html
 ```
 
 ### 参数说明
@@ -30,11 +31,101 @@ http://sso.zhaochewisdom.com/serviceValidate?service=http://www.3rd.com/loginByS
 | service | 是       | 用户登录成功后跳转回第三方系统的URL地址。<br />该地址会在用户中心备案，并会有验证。 |
 | state   | 否       | 第三方系统附带参数，该参数会被传递至service所定义的URL地址，<br />用于第三方系统传递数据使用。 |
 
-!> 注意！如果state参数是带有参数的URL地址，需要两次encode处理，如：
+!> 注意！如果state参数是带有参数的URL地址，需要两次encode处理。
 
 ```
 state = "/index.html?param=value" //没有encode前
 state = "%252Findex.html%253Fparam%253Dvalue" //两次encode后
 ```
 
-## 通过票据请求用户信息
+### 返回说明
+
+> 用户登录成功后，将会重定向到service的网址上，并且带上ticket和state参数。
+
+```
+http://localhost/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw&state=/index.html
+```
+
+## 第二步：通过票据请求用户信息
+
+> 第三方系统在接收到用户票据信息后，可以通过接口请求该票据所对应的用户信息。
+
+```
+// HTTP GET
+http://sso.zhaochewisdom.com/serviceValidate?service=http://localhost/loginBySSO&ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw
+```
+
+### 参数说明
+
+| 参数    | 是否必须 | 说明                              |
+| :------ | :------- | :-------------------------------- |
+| service | 是       | 请求授权登录时传递的service参数。 |
+| ticket  | 是       | 用户票据。                        |
+
+### 返回说明
+
+### 验证成功的返回结果
+```
+{
+    "code": 0,
+    "msg": "",
+    "innerMsg": "",
+    "results": {
+        "serviceResponse": {
+            "authenticationSuccess": {
+                "user": "27712164270902987004601033215261",
+                "attributes": {
+                    "credentialType": "UsernamePasswordCredential",
+                    "isFromNewLogin": [
+                        false
+                    ],
+                    "authenticationDate": [
+                        1518147447.251
+                    ],
+                    "authenticationMethod": "RestAuthenticationHandler",
+                    "successfulAuthenticationHandlers": [
+                        "RestAuthenticationHandler"
+                    ],
+                    "longTermAuthenticationRequestTokenUsed": [
+                        false
+                    ]
+                }
+            }
+        }
+    }
+}
+```
+
+### 参数说明
+
+| 参数                                               | 说明                                             |
+| :------------------------------------------------- | :----------------------------------------------- |
+| serviceResponse. authenticationSuccess             | 验证通过的返回对象。                             |
+| serviceResponse. authenticationSuccess. user       | 用户编号，使用此编号关联自己系统中所对应的用户。 |
+| serviceResponse. authenticationSuccess. attributes | 附加属性对象。                                   |
+
+
+### 验证失败的返回结果
+```
+{
+    "code": 0,
+    "msg": "",
+    "innerMsg": "",
+    "results": {
+        "serviceResponse": {
+            "authenticationFailure": {
+                "code": "INVALID_TICKET",
+                "description": "Ticket 'ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw' not recognized"
+            }
+        }
+    }
+}
+```
+### 参数说明
+
+| 参数                                                | 说明                 |
+| :-------------------------------------------------- | :------------------- |
+| serviceResponse. authenticationFailure              | 验证失败的返回对象。 |
+| serviceResponse. authenticationFailure. code        | 错误代码             |
+| serviceResponse. authenticationFailure. description | 错误说明             |
+
