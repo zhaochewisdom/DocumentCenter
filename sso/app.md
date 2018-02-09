@@ -167,3 +167,15 @@ http://sso.zhaochewisdom.com/api/qrcode/login
 
 ## APP内嵌网页登录
 
+> APP会因业务需要嵌入网页端页面，这些网页端只要也与用户中心打通，那么APP只需要在WebView写入用户中心的登录验证Cookie，就能实现嵌入网页自动登录。
+
+```mermaid
+%% Example of sequence diagram
+  sequenceDiagram
+    第三方APP->>嵌入网页: 打开网页
+    嵌入网页->>用户中心: 访问用户中心登录页
+    用户中心-->>第三方APP: 验证是否有登录Cookie
+    第三方APP->>用户中心: 发送当前登录用户的登录Cookie
+    用户中心-->>嵌入网页: 自动登录并跳转至要访问的页面
+    嵌入网页->>第三方APP: 页面打开
+```
