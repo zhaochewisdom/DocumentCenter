@@ -33,8 +33,8 @@ http://sso.zhaochewisdom.com/api/login
 | 参数     | 是否必须 | 说明                               |
 | :------- | :------- | :--------------------------------- |
 | service  | 是       | 安全域名，该地址会再用户中心备案。 |
-| username | 是       | 用户账号                           |
-| password | 是       | 用户密码                           |
+| username | 是       | 用户账号。                         |
+| password | 是       | 用户密码。                         |
 
 ### 返回说明
 
@@ -56,11 +56,12 @@ http://sso.zhaochewisdom.com/api/login
 
 ### 参数说明
 
-| 参数                                               | 说明                                             |
-| :------------------------------------------------- | :----------------------------------------------- |
-| serviceResponse. authenticationSuccess             | 验证通过的返回对象。                             |
-| serviceResponse. authenticationSuccess. user       | 用户编号，使用此编号关联自己系统中所对应的用户。 |
-| serviceResponse. authenticationSuccess. attributes | 附加属性对象。                                   |
+| 参数             | 说明             |
+| :--------------- | :--------------- |
+| results.tgt      | TGT。            |
+| results.ticket   | 用户票据。       |
+| results.service  | 提交的安全域名。 |
+| results.username | 用户账号。       |
 
 ### 验证失败的返回结果
 
@@ -83,8 +84,8 @@ http://sso.zhaochewisdom.com/api/login
 | 参数                                                | 说明                 |
 | :-------------------------------------------------- | :------------------- |
 | serviceResponse. authenticationFailure              | 验证失败的返回对象。 |
-| serviceResponse. authenticationFailure. code        | 错误代码             |
-| serviceResponse. authenticationFailure. description | 错误说明             |
+| serviceResponse. authenticationFailure. code        | 错误代码。           |
+| serviceResponse. authenticationFailure. description | 错误说明。           |
 
 
 ## 第二步：通过票据请求用户信息
