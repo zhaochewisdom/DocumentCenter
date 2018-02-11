@@ -35,8 +35,10 @@
         renderer: {
           code: function(code, lang) {
             if (lang === "mermaid") {
+              var id = "mermaid" + new Date().getTime();
+              var svg = mermaid.render(id, code);
               return (
-                '<div class="mermaid">' + mermaid.render(lang, code) + "</div>"
+                '<div class="mermaid" id="' + id + '">' + svg + "</div>"
               );
             }
             return this.origin.code.apply(this, arguments);
