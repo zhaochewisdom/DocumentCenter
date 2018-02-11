@@ -15,6 +15,8 @@
     第三方网页->>用户: 用户登录系统
 ```
 
+
+
 ## 第一步：请求授权登录(跳转登录页)
 
 > 第三方系统跳转至用户中心登录页，并附带service和state参数。
@@ -45,6 +47,8 @@ state = "%252Findex.html%253Fparam%253Dvalue" //两次encode后
 ```
 http://yourweb.com/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw&state=/index.html
 ```
+
+
 
 ## 第二步：通过票据请求用户信息
 

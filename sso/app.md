@@ -13,6 +13,8 @@
     第三方APP->>用户: 用户登录系统
 ```
 
+
+
 ## 第一步：访问用户登录接口
 
 > 使用账号密码访问用户中心登录接口，获取票据信息。
@@ -81,6 +83,7 @@ http://sso.zhaochewisdom.com/api/login
 | code     | 错误代码。     |
 | msg      | 错误提示。     |
 | innerMsg | 错误内部说明。 |
+
 
 
 ## 第二步：通过票据请求用户信息
@@ -165,9 +168,11 @@ http://sso.zhaochewisdom.com/api/qrcode/login
 | :------ | :--------------------- |
 | results | 扫码登录验证是否通过。 |
 
+
+
 ## APP内嵌网页登录
 
-> APP会因业务需要嵌入网页端页面，这些网页端只要也与用户中心打通，那么APP只需要在WebView写入用户中心的登录验证Cookie，就能实现嵌入网页自动登录。
+> APP会因业务需要嵌入网页端页面，这些网页端只要与用户中心打通，那么APP只需要在WebView写入用户中心的登录验证Cookie，就能实现嵌入网页自动登录。
 
 ```mermaid
 %% Example of sequence diagram
@@ -179,3 +184,74 @@ http://sso.zhaochewisdom.com/api/qrcode/login
     用户中心-->>嵌入网页: 自动登录并跳转至要访问的页面
     嵌入网页->>第三方APP: 页面打开
 ```
+
+### Cookie格式
+
+> domain: sso.zhaochewisdom.com
+>
+> path: /
+>
+> tgt: 用户登录接口获取到的TGT
+>
+> expires: 3天
+
+
+### 代码示例
+```swift
+//
+//  ScanLoginController.swift
+//  sso.test
+//
+//  Created by Lugia on 2018/1/13.
+//  Copyright © 2018年 Lugia. All rights reserved.
+//
+
+import UIKit
+import Motion
+import Alamofire
+import SwiftyJSON
+
+class WebShowController: UIViewController {
+    @IBOutlet weak var web: UIWebView!
+    
+    override func viewDidLoad() {
+        let url = URL(string: "嵌入的页面链接")
+        let request = URLRequest(url: url!)
+        addCustomerCookie(tgt:"tgt")
+        web.loadRequest(request)
+        super.viewDidLoad()
+    }
+    
+    // 为url绑定cookie
+    func addCustomerCookie(tgt:String) {
+        let domain = "sso.zhaochewisdom.com"
+        let expTime = TimeInterval(60 * 60 * 24 * 3)
+        let cookieProps: [HTTPCookiePropertyKey : Any] = [
+            HTTPCookiePropertyKey.domain: domain,
+            HTTPCookiePropertyKey.path: "/",
+            HTTPCookiePropertyKey.name: "tgt",
+            HTTPCookiePropertyKey.value: tgt,
+            HTTPCookiePropertyKey.expires: NSDate(timeIntervalSinceNow: expTime)
+        ]
+        
+        if let cookie = HTTPCookie(properties: cookieProps) {
+            HTTPCookieStorage.shared.setCookie(cookie)
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func btnBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+```
+
+
+
+## 刷新用户TGT
+
+!> 用户登录后获取到的TGT的有效时间为3天，APP需要在TGT失效后，重新获取最新的TGT。
