@@ -252,6 +252,6 @@ class WebShowController: UIViewController {
 
 
 
-## 刷新用户TGT
+## 用户凭证超时刷新
 
-!> 用户登录后获取到的TGT的有效时间为3天，APP需要在TGT失效后，重新获取最新的TGT。
+!> 用户登录后获取到的凭证有效时间为3天，当用户凭证失效后，客户端可通过[登录接口](sso/app?id=第一步：访问用户登录接口)重新获取凭证。
