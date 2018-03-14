@@ -21,7 +21,7 @@
 
 ```
 // HTTP POST
-http://sso.zhaochewisdom.com/api/login
+http://api.zhaochewisdom.com/sso/api/login
 // FORM BODY
 {
 	"username": "username",
@@ -115,7 +115,7 @@ http://sso.zhaochewisdom.com/api/login
 
 ```
 // HTTP POST
-http://sso.zhaochewisdom.com/api/qrcode/login
+http://api.zhaochewisdom.com/sso/api/qrcode/login
 // FORM BODY
 {
 	"qrcode": "qrcode",

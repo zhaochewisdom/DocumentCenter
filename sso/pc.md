@@ -56,7 +56,7 @@ http://yourweb.com/loginBySSO?ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0Sr
 
 ```
 // HTTP GET
-http://sso.zhaochewisdom.com/serviceValidate?service=http://yourweb.com/loginBySSO&ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw
+http://api.zhaochewisdom.com/sso/api/serviceValidate?service=http://yourweb.com/loginBySSO&ticket=ST-5864-EqLV2DUJjN2S8uq0ZIlbhGuWx3VZ10YQ0SrEnV19yvN5sODNc4AaCA-sso-794c4fbdd6-rs8fw
 ```
 
 ### 参数说明
