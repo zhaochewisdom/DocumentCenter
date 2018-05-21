@@ -25,7 +25,7 @@ SDK详细使用文档：
 + [IOS 接入文档](https://docs.jiguang.cn/jpush/client/iOS/ios_sdk/)
 + [Android 接入文档](https://docs.jiguang.cn/jpush/client/Android/android_sdk/)
 + [WindowsPhone 接入文档](https://docs.jiguang.cn/jpush/client/WindowsPhone/winphone_sdk/)
-
+> **注意：遇到需要某些授权信息请联系我公司相关人员**
 ## 服务端集成
 
 提供遵从 REST 规范的 HTTP API，以供开发者远程调用推送服务。
@@ -55,7 +55,7 @@ $.ajax({
     }
 });
 ```
-
+> **注意：Rest API 只需要提供此令牌即可，无需再提供其他信息。例如`appKey`、`masterSecret`等信息**
 ## API列表
 
 ### 消息推送接口
