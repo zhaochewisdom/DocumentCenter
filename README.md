@@ -1,1 +1,1 @@
-# 你好，朝彻
+# [朝彻科技文档中心](https://zhaochewisdom.github.io/docs/#/)
