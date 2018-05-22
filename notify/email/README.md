@@ -1,7 +1,7 @@
 ## 服务端集成
 提供遵从 REST 规范的 HTTP API，以供开发者远程调用推送服务。
 
-#### REST API 基本约束
+### REST API 基本约束
 + API 被设计为符合 HTTP, REST 规范。
 + 如无特殊说明，调用参数值应转码为：UTF-8, URL编码。
 + API 请求有频率限制。
