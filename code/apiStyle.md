@@ -96,9 +96,9 @@ ajax.PATCH('/api/v1/users/userId');
 ajax.DELETE('/api/v1/users/userId');
 ```
 
+#### Accept
 
-
-
+默认应该使用`application/json`。
 
 #### 关于批量操作Method选择问题说明
 
@@ -115,6 +115,12 @@ REST Full  API中的复杂查询不应该使用`POST`，而应该使用`GET` + `
 TODO:待完善
 
 ### 响应规范 
+
+响应数据在没有特殊情况下，一律使用`application/json`。
+
+#### Content-Type
+
+默认应该使用`application/json
 
 #### 状态码
 
