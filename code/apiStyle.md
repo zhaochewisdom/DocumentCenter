@@ -136,9 +136,9 @@ TODO:待完善
 
 ### 响应格式
 
-- GET /collection 返回Resource对象的列表
+- GET /collection 返回资源对象的列表
 - GET /collection/resource 返回一个单独的资源对象
-- POST /collection 返回新创建的Resource对象
+- POST /collection 返回新创建的资源对象
 - PUT /collection/resource 返回完整的资源对象
 - PATCH /collection/resource 返回完整的资源对象
 - DELETE /collection/resource 返回一个空文档
