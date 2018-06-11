@@ -1,7 +1,7 @@
 - **开发规范**
 	- [数据库规范](code/sqlStyle.md)
 	- [API开发规范](code/apiStyle.md)
-	- [数据库规范](code/imageStyle.md)
+	- [容器规范](code/imageStyle.md)
 - **用户中心**
 	- [简介](sso/README.md)
 	- [网页端集成](sso/pc.md)
