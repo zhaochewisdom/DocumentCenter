@@ -9,10 +9,19 @@
 
 Endpoint命名应遵守以下格式：
 
+格式：`/api/{version}/{resources}/:resource?key=value`
+``` javascript
+// 示例：获取用户
+router.get('/api/v1/users/:userId');
 ```
-[Method] /api/{版本}/{资源}/参数?key=value
-```
+在某些业务涉及到无法用`CURD`来描述时，可使用标准的`actions`进行替代。
+格式：`/api/{version}/{resources}/:resource/actions/:action`
+例如：
+```javascript
+// 示例：停止某个任务
+router.get('/api/v1/task/:taskId/actions/stop');
 
+```
 约定：
 
 + 严格准守REST Full API 关于`HTTP Method`的使用说明。
@@ -81,19 +90,19 @@ ajax.get('/api/v1/users/man/18')
 ajax.GET('/api/v1/users');
 
 // 获取单个资源
-ajax.GET('/api/v1/users/userId');
+ajax.GET('/api/v1/users/:userId');
          
 // 创建资源
 ajax.POST('/api/v1/users');
 
 // 修改单个资源整个对象
-ajax.PUT('/api/v1/users/userId');
+ajax.PUT('/api/v1/users/:userId');
 
 // 修改单个资源部分内容
-ajax.PATCH('/api/v1/users/userId');
+ajax.PATCH('/api/v1/users/:userId');
 
 // 删除单个资源
-ajax.DELETE('/api/v1/users/userId');
+ajax.DELETE('/api/v1/users/:userId');
 ```
 
 ### Accept
