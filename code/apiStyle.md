@@ -1,3 +1,4 @@
+## Web API 设计规范
 服务端API使用[REST Full API](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)风格开发。
 
 ### 路由规范

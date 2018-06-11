@@ -6,6 +6,6 @@
 > 
 
 
-[数据库规范](sqlStyle/index?id=数据库设计规范)
+[编码规范](code/sqlStyle?id=数据库设计规范)
 [用户中心](sso/README?id=什么是用户中心)
 [通知服务](notify/README?id=通知服务)
