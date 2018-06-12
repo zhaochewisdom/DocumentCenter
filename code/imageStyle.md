@@ -2,7 +2,7 @@
 
 + 底层依赖镜像应使用Docker官方提供的镜像，具体为在[Docker Hub](https://store.docker.com)中镜像作者为`Docker`的镜像，或者是由有固定官方组织和机构维护的镜像，例如Oracle、Microsoft 、Google等。
 + 尽量的精简，以减小镜像的大小。
-+ 减少[构建层级](#/构建层级)，减少不必要的构建时间。
++ 减少[构建层级](#构建层级)，减少不必要的构建时间。
 + 提供`.dockerignore`文件，详情参考[官方文档说明](https://docs.docker.com/engine/reference/builder/#dockerignore-file)。
 + 使用`Dockerfile`构建镜像。
 
