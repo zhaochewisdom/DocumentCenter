@@ -14,13 +14,15 @@ Endpoint命名应遵守以下格式：
 // 示例：获取用户
 router.get('/api/v1/users/:userId');
 ```
-在某些业务涉及到无法用`CURD`来描述时，可使用标准的`actions`进行替代。
-格式：`/api/{version}/{resources}/:resource/actions/:action`
+在某些业务涉及到无法用`CURD`来描述时，可使用`action`和子资源替代。
+格式：`/api/{version}/{resources}/:resource/:action`
 例如：
 ```javascript
-// 示例：停止某个任务
-router.get('/api/v1/task/:taskId/actions/stop');
-
+// 示例：
+// 1.停止某个任务
+router.patch('/api/v1/task/:taskId/stop');
+// 2.收藏
+router.post('/api/v1/news/:id/star')
 ```
 约定：
 
