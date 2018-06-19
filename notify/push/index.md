@@ -1,4 +1,4 @@
-## 什么是移动推送
+## 移动推送
 移动推送服务可以为APP提供推送服务，支持 Android, iOS, Winphone 三大手机平台。
 
 ## 支持的消息形式
@@ -66,7 +66,7 @@ $.ajax({
 | -------- | :------------------------------------------------------------------------- |
 |          | 推送消息                                                                   |
 | Base URL | http://api.zhaochewisdom.com/notify                                        |
-| Path     | /push                                                                      |
+| Path     | /api/push                                                                      |
 | Method   | POST                                                                       |
 | Params   | [完整参数](https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7) |
 
@@ -76,6 +76,6 @@ $.ajax({
 | -------- | :-------------------------------------------------------------------------- |
 |          | 获取推送唯一标识符                                                          |
 | Base URL | http://api.zhaochewisdom.com/notify                                         |
-| Path     | /push/cid                                                                   |
+| Path     | /api/push/cid                                                                   |
 | Method   | GET                                                                         |
 | Params   | [完整参数](https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#cid) |

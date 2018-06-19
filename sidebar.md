@@ -9,9 +9,9 @@
 	- [WebHook](sso/webhook.md)
 - **通知服务**
 	- [简介](notify/README.md)
-	- [短信服务](notify/sms/README.md)
-	- [移动推送](notify/push/README.md)
-	- [电子邮箱](notify/email/README.md)
+	- [短信服务](notify/sms/index.md)
+	- [移动推送](notify/push/index.md)
+	- [电子邮箱](notify/email/index.md)
 - [**关于朝彻**](README.md)
 
 
