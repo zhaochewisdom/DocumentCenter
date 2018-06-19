@@ -64,7 +64,7 @@ $.ajax({
 
 | 名称     | 说明                                                                       |
 | -------- | :------------------------------------------------------------------------- |
-|          | 推送消息                                                                   |
+|          | 推送消息(Beta)                                                                   |
 | Base URL | http://api.zhaochewisdom.com/notify                                        |
 | Path     | /api/push                                                                      |
 | Method   | POST                                                                       |
@@ -74,7 +74,7 @@ $.ajax({
 
 | 名称     | 说明                                                                        |
 | -------- | :-------------------------------------------------------------------------- |
-|          | 获取推送唯一标识符                                                          |
+|          | 获取推送唯一标识符(Beta)                                                          |
 | Base URL | http://api.zhaochewisdom.com/notify                                         |
 | Path     | /api/push/cid                                                                   |
 | Method   | GET                                                                         |
