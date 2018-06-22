@@ -37,25 +37,6 @@ SDK详细使用文档：
 + API 请求有频率限制。
 
 ### 鉴权机制
-
-所有的API均需要携带令牌才能够正常访问。
-请求时需要在请求头中携带`ZC-Authorization`字段，令牌可从为从[开发者门户](http://developer.zhaochewisdom.com/portal)中申请获取.
-
-例如：
-``` JavaScript
-# http request
-
-$.ajax({
-    headers: {
-        //设置令牌
-        'ZC-Authorization': "token"
-    },
-    type: "POST",
-    success: function (data) {
-        //...
-    }
-});
-```
 > **注意：Rest API 只需要提供此令牌即可，无需再提供其他信息。例如`appKey`、`masterSecret`等信息**
 
 ## API列表
@@ -66,7 +47,7 @@ $.ajax({
 | -------- | :------------------------------------------------------------------------- |
 |          | 推送消息(Beta)                                                                   |
 | Base URL | http://api.zhaochewisdom.com/notify                                        |
-| Path     | /api/push                                                                      |
+| Path     | /api/notice                                                                      |
 | Method   | POST                                                                       |
 | Params   | [完整参数](https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7) |
 
@@ -76,6 +57,6 @@ $.ajax({
 | -------- | :-------------------------------------------------------------------------- |
 |          | 获取推送唯一标识符(Beta)                                                          |
 | Base URL | http://api.zhaochewisdom.com/notify                                         |
-| Path     | /api/push/cid                                                                   |
+| Path     | /api/notice/cid                                                                   |
 | Method   | GET                                                                         |
 | Params   | [完整参数](https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#cid) |
