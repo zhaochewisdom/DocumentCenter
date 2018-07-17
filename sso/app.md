@@ -119,8 +119,7 @@ http://api.zhaochewisdom.com/sso/api/qrcode/login
 // FORM BODY
 {
 	"qrcode": "qrcode",
-	"tgt": "tgt",
-	"service": "http://yourweb.com/"
+	"tgt": "tgt"
 }
 ```
 
@@ -130,7 +129,7 @@ http://api.zhaochewisdom.com/sso/api/qrcode/login
 | :------ | :------- | :--------------------------------- |
 | qrcode  | 是       | 扫描到的二维码信息。               |
 | tgt     | 是       | 用户登录接口获取到的TGT。          |
-| service | 是       | 安全域名，该地址会再用户中心备案。 |
+
 
 ### 返回说明
 
