@@ -1,5 +1,5 @@
 ## 风格
-服务端API使用[REST Full API](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)风格开发。
+服务端API使用[RESTful API](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)风格开发。
 
 ## 路由规范
 
@@ -26,7 +26,7 @@ router.post('/api/v1/news/:id/star')
 ```
 约定：
 
-+ 严格准守REST Full API 关于`HTTP Method`的使用说明。
++ 严格准守RESTful API 关于`HTTP Method`的使用说明。
 + 以`/api`开头，例如：`https://test.com/api/xxx`
 + 版本：在`/api`之后是版本信息，在朝彻API网关之后的所有服务不要有版本这一段，具体查看[版本特殊说明](#/版本特殊说明)。
 + 资源：版本只有是资源名称，例如：`Users`，命名应为**名词复数**。
@@ -56,7 +56,7 @@ router.get('/api/users',callbak);
 
 ## 参数规范
 
-参数应按REST Full API风格定义，如果自定义参数应加在`QueryString`中。
+参数应按RESTful API风格定义，如果自定义参数应加在`QueryString`中。
 
 例如定义一个获取所有年龄为18岁的男性用户的Endpoint：
 
@@ -113,13 +113,18 @@ ajax.DELETE('/api/v1/users/:userId');
 
 ### 关于批量操作Method选择问题说明
 
-REST Full 设置中经常碰到的批量操作问题，此处列举出具体操作规范。
+RESTful API设置中经常碰到的批量操作问题，此处列举出具体操作规范。
 
 #### 复杂查询问题
 
 复杂查询指的是一个列表有很多参数，在传统的API编写中经常会作为`POST`请求进行操作，这与HTTP协议对于`POST`不符。
 
-REST Full  API中的复杂查询不应该使用`POST`，而应该使用`GET` + `QueryString`的方式进行。这种方式涉及到URL长度问题。此处将超长的`QueryString`作为小概率事件，应从设计上避免出现此类Endpoit。
+RESTful API中的复杂查询不应该使用`POST`，而应该使用`GET` + `QueryString`的方式进行。这种方式涉及到URL长度问题。此处将超长的`QueryString`作为小概率事件，应从设计上避免出现此类Endpoit。
+#### 分页查询问题
+分页查询需要返回一些额外的信息，例如总条数，总页数等。API接口开发时，应该将这些响应值放到`header`头中。
+以下定义标准的参数命名：
++ 总数：total
++ ...(待完善)
 
 #### 批量删除问题
 
@@ -160,22 +165,56 @@ TODO:待完善
 ### 响应格式
 
 - GET /collection 返回资源对象的列表
+  ```json
+  {
+      key:value
+  }
+  ```
 - GET /collection/resource 返回一个单独的资源对象
+  ```
+  [
+    {
+      key:value
+    },
+    {
+      key:value
+    }
+  ]
+  ```
 - POST /collection 返回新创建的资源对象
+  ```
+  {
+      key:value
+  }
+  ```
 - PUT /collection/resource 返回完整的资源对象
+  ```
+  {
+    key:value
+  }
+  ```
 - PATCH /collection/resource 返回完整的资源对象
+  ```
+  {
+      key:value
+  }
+  ```
 - DELETE /collection/resource 返回一个空文档
+  ```
+  null //此处null只是表示空，实际无返回值
+  ```
 
 ### 错误处理
 
-当HTTP 响应代码为4xx和5xx时，返回格式为：
+当HTTP响应代码为4xx时，返回格式为：
 
 ```json
 {
-    code:10001,//自定义错误码
-    message:'自定义错误信息'
+    code:10001, // 自定义错误码，可选
+    message:'自定义错误信息' // 可选
 }
 ```
+当HTTP响应代码为5xx时，返回默认错误`Internal Server Error`。
 
 
 
