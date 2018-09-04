@@ -14,8 +14,10 @@
 
 $.ajax({
     headers: {
-        //设置令牌
-        'ZC-Authorization': "token"
+        //设置网关令牌
+        'ZC-Authorization': "token",
+        //设置推送服务accessKey
+        'ZC-X-AccessKey':'此key请联系相关人员获取'
     },
     type: "POST",
     success: function (data) {
